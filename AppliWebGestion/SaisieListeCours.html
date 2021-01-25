@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="style.css" />
+        <title>SaisieListeCours</title>
+    </head>
+
+    <body>
+    	<h1> Saisie de l'ensemble des cours</h1>
+    	<p> 
+    		<form method="post" enctype="multipart/form-data" action="AjouteriCalV3.php">
+    			Sélectionner le fichier à intégrer dans la base de donnée (fichier iCal .ics) : <input name="userfile" type="file" accept=".ics"/>
+    			<input type="submit" value="Enregistrer"/>
+    			<br/>
+    			Le traitement peut être long, merci de bien patienter.
+    		</form>
+    	</p>
+    </body>
+</html>

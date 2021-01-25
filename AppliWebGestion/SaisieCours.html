@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="style.css" />
+        <title>SaisieCours</title>
+    </head>
+
+    <body>
+    	<h1> Saisie du Cours à ajouter</h1>
+    	<h4> 
+    		<form method="post" action="AjouterCours.php">
+    		Type : <select name="type" id="type">
+    			<option value='CM'>CM</option>
+    			<option value='TD'>TD</option>
+    			<option value='TP'>TP</option>
+    		</select>
+    		Date (en format [YYYY-MM-DD HH:ii:ss]) : <input type="text" name="Date" />
+    		Durée en heure (ex : 1h30 => entrer 1.5): <input type="float" name="heure" />
+    		<br/>
+    		Classe concernée : <select name="filiere" id="filiere">
+    			<option value=NULL>non défini</option>
+    			<option value='IAI'>IAI</option>
+    			<option value='MM'>MM</option>
+    			<option value='EBE'>EBE</option>
+    			<option value='IDU'>IDU</option>
+    			<option value='ITII-CM'>ITII-CM</option>
+    			<option value='ITII-MP'>ITII-MP</option>
+    			</select>
+    		<select name="annee" id="annee">
+    			<option value=0>non défini</option>
+    			<option value=1>1</option>
+    			<option value=2>2</option>
+    			<option value=3>3</option>
+    			<option value=4>4</option>
+    			<option value=5>5</option>
+    			</select>		
+    	<input type="submit" value="Enregistrer"/>
+    	</form>
+    </h4>
+    	<br/>
+    	<h1> Cours à modifier</h1>
+    	<h4>
+    		Si un cours manque d'informations, vous pouvez le modifier.
+    		<br/>
+    		Veuillez utiliser les filtres ci-dessous pour vous aider à trouver le cours à modifier
+    		<br/>
+    		(Ne rien remplir vous affichera tous les cours incomplets)
+    		<br/>
+    		<br/>
+    		<form method="post" action="RechercherCours.php">
+    		Date du cours à modifier (en format [YYYY-MM-DD]): <input type="text" name="Date" /> <input type="submit" value="Rechercher"/>
+    		<br/>
+    		(NON implémentée) Classe concernée : <select name="filiere" id="filiere">
+    			<option value=NULL>non défini</option>
+    			<option value='IAI'>IAI</option>
+    			<option value='MM'>MM</option>
+    			<option value='EBE'>EBE</option>
+    			<option value='IDU'>IDU</option>
+    			<option value='ITII-CM'>ITII-CM</option>
+    			<option value='ITII-MP'>ITII-MP</option>
+    			</select>
+    		<select name="annee" id="annee">
+    			<option value=0>non défini</option>
+    			<option value=1>1</option>
+    			<option value=2>2</option>
+    			<option value=3>3</option>
+    			<option value=4>4</option>
+    			<option value=5>5</option>
+    			</select>
+    		</form>	
+    	</h4>
+    </body>
+</html>

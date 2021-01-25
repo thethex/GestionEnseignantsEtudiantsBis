@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Saisie de nouvelles données manuelles</title>
+    </head>
+
+    <body>
+    	<h1> Saisie de nouvelles données manuelles</h1>
+    	<p> 
+    		<form method="post" action="RedirectionManuelle.php">
+    		Vous souhaitez ajouter ou modifier manuellement : <select name="choix" id="choix">
+    			<option value="cours">Un cours</option>
+    			<option value="module">Un module</option>
+    			<option value="enseignant">Un enseignant</option>
+    			<option value="etudiant">Un étudiant</option>
+    		</select>
+    	<input type="submit" value="Enregistrer"/>
+    	</form>
+    </p>
+    </body>
+</html>

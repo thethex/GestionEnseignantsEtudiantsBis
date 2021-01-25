@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="style.css" />
+        <title>SaisieEnseignant</title>
+    </head>
+    <body>
+    	<h1> Saisie de l'enseignant à ajouter</h1>
+    	<h4> 
+    		<form method="post" action="AjouterEnseignant.php">
+    		Nom : <input type="text" name="Nom" />
+    		Prenom : <input type="text" name="Prenom" />
+    		Type : <select name="type" id="choix1">
+    			<option value='permanant'>permanant</option>
+    			<option value='vacataire'>vacataire</option>
+    			</select>
+    		Service : <input type="int" name="service" />
+    		Heure supplémentaires : <select name="heuresupp" id="choix2">
+    			<option value='oui'>oui</option>
+    			<option value='non'>non</option>
+    			</select>
+    	<input type="submit" value="Enregistrer"/>
+    	</form>
+    	 </h4>
+    </body>
+</html>
