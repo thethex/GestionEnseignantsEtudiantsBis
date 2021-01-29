@@ -59,8 +59,8 @@
 
 #voir-scan{
   margin:0 auto;
-  min-width:1000px;
-  width:80%;
+  min-width:800px;
+  width:100%;
 
 }
 
@@ -71,5 +71,35 @@
 
 .sous-zone-affichage{
   flex: 1 1 100%;
+  padding:4px;
 
+
+}
+.ediTable{
+    cursor: pointer; /* "hand" cursor */
+  }
+.ediTable:hover{
+  background:rgba(0,0,255,0.2);
+}
+
+.editTable-entry{
+    bottom:10%;
+    right:5%;
+    width:110%;
+    height:120%;
+
+    position:relative;
+    border:solid 2px blue;
+    border-radius: 4px;
+    z-index:10;
+    background:white;
+}
+.Here-s-a-little-lesson-of-trickery{
+  position:fixed;
+  z-index:5;
+  top:0;
+  left:0;
+  width:100vw;
+  height:100vh;
+  background-color:rgba(0,0,0,0.2);
 }

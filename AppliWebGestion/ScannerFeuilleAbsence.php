@@ -118,7 +118,7 @@
           echo'<div id="boutons-affichage">
                   <button id="bouton-scan" onclick="toggleScan()">Cacher scan</button>';
                     if(isset($_POST['scanTraite'])){
-                      echo '<button id="bouton-JSON" onclick="toggleJSON()">Cacher scan</button>';
+                      echo '<button id="bouton-JSON" onclick="toggleJSON()">Cacher JSON</button>';
                     };
           echo '</div>';
 
@@ -131,30 +131,127 @@
                     <script> function toggleScan() {  var x = document.getElementById("scan");var y = document.getElementById("bouton-scan");if (x.style.display === "none") {  x.style.display = "block";  y.innerHTML="Cacher scan";} else {x.style.display = "none";  y.innerHTML="Voir scan";  }  } </script>
                     ';
 
+                  //si le scan à été traité par le python on peut l'afficher
                   if(isset($_POST['scanTraite'])){
-                  echo '<div id="JSON" class="sous-zone-affichage">
-                  <iframe src='.$target_file.' style="width:100%;height:700px;"></iframe>
-                  </div>
-                  <script> function toggleJSON() {  var x = document.getElementById("JSON");var y = document.getElementById("bouton-JSON");if (x.style.display === "none") {  x.style.display = "block";  y.innerHTML="Cacher JSON";} else {x.style.display = "none";  y.innerHTML="Voir JSON";  }  } </script>
-                  ';
-                };
+                  echo '<div id="JSON" class="sous-zone-affichage">';
+
+                      ini_set('display_errors',1);
+                      error_reporting(E_ALL);
+                      require_once('Config.php');
+
+
+                      $conn = new mysqli($bdServer, $bdUser, $bdUserPasswd,$bdName);
+
+                      // Check connection
+                      if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                      }
+                      echo "Connected successfully<br>";
+
+                      $query = 'SELECT * FROM cours JOIN module ON cours.idModule=module.IdModule  WHERE idcours=2';
+                      $result = mysqli_query($conn, $query);
+
+
+                      //fonctionnel au dernières nouvelles check plus bas
+                      $row = mysqli_fetch_assoc($result);
+
+                      $filiere=$row["filiere"];
+                      $promo=$row["promo"];
+                      $groupetd=$row["groupetd"];
+                      $groupetp=$row["groupetp"];
+
+                      //on recupere les etudiants qui appartiennent à la promo et si besoin le groupe de TD/TP
+                      $query = 'SELECT * FROM etudiant WHERE promo='.$promo.' AND filiere="'.$filiere.'"';
+
+                      if($groupetd!==NULL){
+                          $query=$query.$groupetd;
+                      }
+                      if($groupetp!==NULL){
+                          $query=$query.$groupetp;
+                      }
+
+
+                      $result = mysqli_query($conn, $query);
+
+                      //si on a demandé à traiter l'image on lance le script python associé
+
+                      //echo print_r($_POST);
+                      if(isset($_POST['scanTraite'])){
+
+                          $command = 'python3 /home/thethex/Documents/www/AppliWebGestion.com/py/test2.py ';
+
+                          exec($command, $out, $status);
+
+                          print_r($out[0]);
+                          $array = json_decode($out[0], true);
+
+                      }
+
+                      if (mysqli_num_rows($result) > 0) {
+                        echo '<table style="width:100%"; border="1">
+                        <thead>
+                        <tr>
+                          <th>Cours : '.$row["nom"].'</th>
+                          <th>idCours : '.$row["idcours"].'</th>
+
+                        </tr>
+                        <tr>
+                          <th></th>
+                          <th>Nom</th>
+                          <th>Prénom</th>
+                        <th>Présence</th>
+                        </tr>
+                        </thead>';
+                        $i=1;
+                         while($row = mysqli_fetch_assoc($result)) {
+                            echo '<tr>';
+
+                            echo '<td  id="'.$row["idetudiant"].'">' . $i ."</td>";
+
+                            echo '<td>' . $row["prenom"] ."</td>";
+
+                            echo '<td>' . $row["nom"] ."</td>";
+
+                            echo '<td ><div  class="ediTable" onclick="editeAbsence(this);">' ."$array[$i]" ."</div></td>";
+
+                            echo "</tr>";
+                            $i++;
+                         }
+                        echo "</table>";
+
+                         } else {
+                             echo "0 results";
+                         }
+                         //script permettant de modifier le contenu des cases de présence
+                         echo '<script>
+                                      function editeAbsence(elem){
+                                          var valeur = elem.innerHTML;
+                                          console.log(valeur);
+                                          if(valeur=="absent"){input="<select class=\" editTable-entry\"> <option value=\"present\">present</option> <option value=\"absent\" selected>absent</option></select>";};
+                                          if(valeur=="present"){input="<select class=\" editTable-entry\"> <option value=\"present\" selected>present</option> <option value=\"absent\">absent</option></select>";};
+                                          elem.parentElement.innerHTML=input+"<div onclick=\"valideEditeAbsence(this);\" class=\"Here-s-a-little-lesson-of-trickery\"></div>";
+                                      }
+                                      function valideEditeAbsence(elem){
+                                          console.log("got you!");
+                                          e=elem.parentElement.firstChild;
+                                          elem.parentElement.innerHTML="<div  class=\"ediTable\" onclick=\"editeAbsence(this);\">"+e.options[e.selectedIndex].text+"</div></td>";
+                                      }
+
+                               </script>';
+                         mysqli_close($conn);
+
+
+
+
+                         echo '</div>
+                         <script> function toggleJSON() {  var x = document.getElementById("JSON");var y = document.getElementById("bouton-JSON");if (x.style.display === "none") {  x.style.display = "block";  y.innerHTML="Cacher JSON";} else {x.style.display = "none";  y.innerHTML="Voir JSON";  }  } </script>
+                         ';
+                    };
 
                 echo '</div>';
 
 
-          //si on a demandé à traiter l'image on lance le script python associé
-          echo "4<br>".$_POST_['scanTraite'];
-          echo print_r($_POST);
-          if(isset($_POST['scanTraite'])){
 
-              $command = 'python3 /home/thethex/Documents/www/AppliWebGestion.com/py/test.py ';
-
-              exec($command, $out, $status);
-              echo "Returned with status $retval and output:\n";
-              print_r($out);
-              $array = json_decode($json, true);
-              echo "4";
-          }
 
         echo '<div id="traitement-scan">
 
