@@ -1,3 +1,14 @@
+
+#Methode-enregistrement-manuel{
+
+}
+
+#Methodes-scan{
+
+}
+
+
+
 #formulaire-upload-scan{
   padding:10px;
   width:50%;
@@ -8,7 +19,7 @@
 #conteneur-formulaire-upload-scan{
     display:flex;
     flex-wrap:wrap;
-    height:100%;
+
     width:100%;
     border-radius:8px;
     background-color:white;
@@ -26,6 +37,7 @@
 
 .input-file + label {
     cursor: pointer; /* "hand" cursor */
+    color:rgba(0,0,0,0.6);
     background-color: white;
     overflow:hidden;
     display: flex;
@@ -37,18 +49,31 @@
 
 .input-file:focus + label,
 .input-file + label:hover {
-   transform: scale(1.02);
-    background-color: rgba(0,0,255,0.2);
+    color:#1b528a;
+    transform: scale(1.02);
+    background-color: #d8ecf6;
+    outline: 1px dashed #fff;
+    outline-offset: -10px;
 }
 
 .bouton-formulaire-upload{
-    cursor: pointer; /* "hand" cursor */
-      border: none;
-      background-color: blue;
-      color:white;
       height:60px;
       flex:1 1 25%;
 }
+
+
+.grosBoutonBleu{
+    cursor: pointer; /* "hand" cursor */
+    border: none;
+    background-color: #1d85c8;
+    color:white;
+}
+.grosBoutonBleu:hover{
+  transform: scale(1.02);
+  background-color: #0d75b8;
+}
+
+
 #boutons-affichage{
   width:100%;
   display:flex;
@@ -102,4 +127,19 @@
   width:100vw;
   height:100vh;
   background-color:rgba(0,0,0,0.2);
+}
+
+.BoutonFlottant{
+  margin:0;
+  position:fixed;
+  left:0;
+  bottom:0;
+  width:100%;
+  background:rgba(0,0,0,0.4);
+  height:70px;
+  justify-content: center;
+  display:flex;
+}
+.BoutonFlottant > *{
+    height:100%;
 }
