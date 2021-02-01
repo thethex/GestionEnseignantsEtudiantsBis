@@ -66,10 +66,8 @@
           <div id="conteneur-formulaire-upload-scan">
             <?php
             //transmition des valeur du POST actuel
-
-             echo '<input type="hidden" value="'.$_POST["idCours"].'" name="idCours">';
-
-             ?>
+              echo '<input type="hidden" value="'.$_POST["idCours"].'" name="idCours">';
+            ?>
             <input type="file" class="input-file" name="fileToUpload" id="fileToUpload">
             <label id="label-fileToUpload" for="fileToUpload">Choose a file</label>
             <input class="grosBoutonBleu bouton-formulaire-upload" type="submit" value="Valider" name="submit">
@@ -212,11 +210,11 @@
                       //echo print_r($_POST);
                       if(isset($_POST['scanTraite'])){
 
-                          $command = 'python3 ./py/test2.py ';
+                          $command = './py/test2Python.py ';
 
                           exec($command, $out, $status);
-
                           print_r($out[0]);
+                          $out = str_replace('\'', '"', $out);
                           $array = json_decode($out[0], true);
 
                       }
@@ -254,7 +252,6 @@
                             echo '<td>' . $row["prenom"] ."</td>";
 
                             echo '<td>' . $row["nom"] ."</td>";
-
                             if(isset($array) && $array[$i]=="present"){
                                 echo '<td ><select name="presence'.$i.'" class="ediTable"><option value="present" selected>present</option> <option value="absent">absent</option></select></td>';
                             }else{
@@ -295,10 +292,10 @@
                   <form class="BoutonFlottant" action="ScannerFeuilleAbsence.php" method="post" enctype="multipart/form-data">';
                         //transmition des valeur du POST actuel
                         foreach($_POST as $key => $val) {
-                            if($key !== 'uploadImage'){
-                              echo '<input type="hidden" value="'.$val.'" name="'.$key.'">';
-                              }
-                            };
+                          if ($key!=="uploadImage"){
+                            echo '<input type="hidden" value="'.$val.'" name="'.$key.'">';
+                          };
+                        };
                         echo  '<input type="hidden" name="target_file" value='.$target_file.' />
                         <input type="hidden" name="scanTraite" value="true" />
                         <input class="grosBoutonBleu" type="submit" value="Traiter le scan" name="submit">
