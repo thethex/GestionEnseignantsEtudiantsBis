@@ -3,6 +3,7 @@
 
 #-----------------------------------------------------------------------------#
 # Importation des librairies
+
 import cv2
 import json
 import numpy as np
@@ -31,11 +32,11 @@ def isChecked(img,percent):
         for l in range(largeur):
             if img[h,l] == 0:
                 compteur +=1;
-    print("C:",compteur,"S:",seuil, "Taille_Image:",hauteur*largeur)
+    #print("C:",compteur,"S:",seuil, "Taille_Image:",hauteur*largeur)
     if compteur >= seuil :
-        return True
+        return "present"
     else:
-        return False
+        return "absent"
         
 def retirerBordure(img,percent):
     h=len(img)
@@ -47,19 +48,18 @@ def retirerBordure(img,percent):
   
 #-----------------------------------------------------------------------------#
 # Définition des variables
+
 res="";
 case=0
 compteur=0
-output='{"1":"true"}'
+output='{"1":"present"}'
 output=json.loads(output)
-pages = convert_from_path('test_tab_2.pdf')
+pages = convert_from_path('test_tab_2.pdf', poppler_path='E:/Program Files/Poppler/Library/bin')
 for page in pages:
     page.save('out.jpg','JPEG')
 
 
 #-----------------------------------------------------------------------------#
-
-print("Début")
 
 # Load image
 image = cv2.imread('out.jpg')
@@ -99,8 +99,6 @@ for c in cnts:
         cv2.rectangle(image, (x, y), (x + w, y + h), (36,255,12), -1)
         ROI = original[y:y+h, x:x+w]
         # Visualization
-        cv2.imshow('image', image)
-        cv2.imshow('ROI', ROI)
         case=case+1
         if((case-6)%9==4 and case>10):
             compteur+=1
@@ -109,13 +107,9 @@ for c in cnts:
             thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
             croped = retirerBordure(thresh,10)
             presence=isChecked(croped,1)
-            temp_json=json.dumps({str(compteur):str(presence)},separators=(',', ':'))
+            temp_json=json.dumps({str(compteur):presence},separators=(',', ':'))
             temp_json=json.loads(temp_json)
-        
             output.update(temp_json)
-        cv2.waitKey(20)
-
-cv2.waitKey()
 print(output)
 
 #Code pour reconnaissance
