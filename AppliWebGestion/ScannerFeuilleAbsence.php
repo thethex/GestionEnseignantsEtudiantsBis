@@ -66,13 +66,14 @@
           <div id="conteneur-formulaire-upload-scan">
             <?php
             //transmition des valeur du POST actuel
-            foreach($_POST as $key => $val) {
-              echo '<input type="hidden" type="submit" value="'.$val.'" name="'.$key.'">';
-             };
-            ?>
+
+             echo '<input type="hidden" value="'.$_POST["idCours"].'" name="idCours">';
+
+             ?>
             <input type="file" class="input-file" name="fileToUpload" id="fileToUpload">
             <label id="label-fileToUpload" for="fileToUpload">Choose a file</label>
             <input class="grosBoutonBleu bouton-formulaire-upload" type="submit" value="Valider" name="submit">
+            <input type="hidden" name="uploadImage" value="true" />
           </div>
         </form>
 
@@ -87,7 +88,7 @@
         <?php
 
         //si l'image n'a pas été upload on essaie de l'upload
-        if(!isset($_POST['target_file'])){
+        if($_POST['uploadImage']=='true'){
           $target_dir = "uploads/";
           $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
           $uploadOk = 1;
@@ -211,7 +212,7 @@
                       //echo print_r($_POST);
                       if(isset($_POST['scanTraite'])){
 
-                          $command = 'python3 /home/thethex/Documents/www/AppliWebGestion.com/py/test2.py ';
+                          $command = 'python3 ./py/test2.py ';
 
                           exec($command, $out, $status);
 
@@ -253,7 +254,8 @@
                             echo '<td>' . $row["prenom"] ."</td>";
 
                             echo '<td>' . $row["nom"] ."</td>";
-                            if($array[$i]=="present"){
+
+                            if(isset($array) && $array[$i]=="present"){
                                 echo '<td ><select name="presence'.$i.'" class="ediTable"><option value="present" selected>present</option> <option value="absent">absent</option></select></td>';
                             }else{
                                 echo '<td ><select name="presence'.$i.'" class="ediTable"><option value="present" >present</option> <option value="absent" selected>absent</option></select></td>';
@@ -293,7 +295,9 @@
                   <form class="BoutonFlottant" action="ScannerFeuilleAbsence.php" method="post" enctype="multipart/form-data">';
                         //transmition des valeur du POST actuel
                         foreach($_POST as $key => $val) {
-                          echo '<input type="hidden" value="'.$val.'" name="'.$key.'">';
+                            if($key !== 'uploadImage'){
+                              echo '<input type="hidden" value="'.$val.'" name="'.$key.'">';
+                              }
                             };
                         echo  '<input type="hidden" name="target_file" value='.$target_file.' />
                         <input type="hidden" name="scanTraite" value="true" />
