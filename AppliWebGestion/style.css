@@ -28,7 +28,8 @@ h3
 }
 body
 {
-
+	padding:0;
+	margin:0;
 	background-color: rgb(240,240,240);
 }
 .logofloat
@@ -58,16 +59,15 @@ body
 @media (prefers-color-scheme: dark) {
 	body
 	{
-		
+
 		background-color: rgb(34,37,42);
 	}
-	p,b,h1,h2,h3,body{
+	p,b,h1,h2,h3,body,a{
 		color:rgb(230,230,230);
 	}
 	.blured-big-panel{
 		box-shadow:3px 3px 5px 6px rgba(255,255,255,0.1);
 		background-color:rgba(255,255,255,0.4);
-	
+
 	}
 }
-

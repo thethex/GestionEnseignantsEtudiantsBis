@@ -9,7 +9,6 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="./style.css" />
           <link rel="stylesheet" href="./css/ScannerFeuille.css" />
         <title>Scan Feuille Absence</title>
     </head>
@@ -44,8 +43,8 @@
 
 
           <div id="traitement-scan">
-          <form id="formulaire-upload-scan" action="ScannerFeuilleAbsence.php" method="post" enctype="multipart/form-data">
-
+          <form id="formulaire-upload-scan" action="index.php" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="page" value="ScannerFeuilleAbsence" >
             <?php
                     //pour la transmition des valeur du POST actuel seul la valeur du pdf envoie est à garder car changer de cours change tout le traitement
                     //comme l'upload de l'image se fait en dessous on rajoute une rustine à la fin de la fonction d'upload (par id donc unpeu sal mais bon ...)
@@ -62,7 +61,8 @@
               </div>
 
 
-        <form id="formulaire-upload-scan" action="ScannerFeuilleAbsence.php" method="post" enctype="multipart/form-data">
+        <form id="formulaire-upload-scan" action="index.php" method="post" enctype="multipart/form-data">
+          <input type="hidden" name="page" value="ScannerFeuilleAbsence" >
           <div id="conteneur-formulaire-upload-scan">
             <?php
             //transmition des valeur du POST actuel
@@ -236,8 +236,8 @@
                         </thead>';
 
 
-                        echo '<form class="BoutonFlottant" action="EnvoiFeuilleAbsence.php" method="post">';
-
+                        echo '<form class="BoutonFlottant" action="index.php" method="post">';
+                        echo '<input type="hidden" name="page" value="ScannerFeuilleAbsence" >';
                         echo '<input type="hidden" name="idCours" value="'.$row["idcours"].'"></input>';
 
                         $i=1;
@@ -289,7 +289,8 @@
                 if($_POST['scanTraite']!=='true'){
                 echo '<div id="traitement-scan">
 
-                  <form class="BoutonFlottant" action="ScannerFeuilleAbsence.php" method="post" enctype="multipart/form-data">';
+                  <form class="BoutonFlottant" action="index.php" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="page" value="ScannerFeuilleAbsence" >';
                         //transmition des valeur du POST actuel
                         foreach($_POST as $key => $val) {
                           if ($key!=="uploadImage"){
