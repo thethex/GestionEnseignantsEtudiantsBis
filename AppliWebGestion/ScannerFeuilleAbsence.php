@@ -49,12 +49,43 @@
                     //pour la transmition des valeur du POST actuel seul la valeur du pdf envoie est à garder car changer de cours change tout le traitement
                     //comme l'upload de l'image se fait en dessous on rajoute une rustine à la fin de la fonction d'upload (par id donc unpeu sal mais bon ...)
 
+
+
+
+
+
+
                     if(isset($_POST['target_file'])){
                       echo '<input type="hidden" name="target_file" value='.$_POST['target_file'].' />';
                     };
-                    echo '  <input name="idCours" value="';if(isset($_POST['idCours'])){echo $_POST['idCours'];}else{echo 'id Cours';};echo '" />
-                          <input  class="grosBoutonBleu bouton-formulaire-upload" type="submit" value="valider cours" name="submit">
-                   ';
+                    echo '  <input type="datetime-local" id="datecours" name="datecours" value="2021-01-18T10:15"';if(isset($_POST['datecours'])){echo $_POST['datecours'];}else{echo 'date cours';};echo '" />';
+
+                      echo '<select name="nomMod" id="nomMod">';
+                      $conn = new mysqli($bdServer, $bdUser, $bdUserPasswd,$bdName);
+
+                      // Check connection
+                      if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                      }
+
+                      $query = 'SELECT nomMod FROM module';
+
+                      $result = mysqli_query($conn, $query);
+                      foreach($result as $key => $val){
+                        foreach($val as $key2 => $res){
+                          if ((isset($_POST['nomMod'])) && $_POST['nomMod']==$res){
+                            echo'<option selected value="'.$res.'">'.$res.'</option>';
+                          }else{
+
+                        echo'<option value="'.$res.'">'.$res.'</option>';
+
+                          }
+                        }
+                      }
+                      echo '</select>';
+
+
+                          echo '<input  class="grosBoutonBleu bouton-formulaire-upload" type="submit" value="valider cours" name="submit">';
 
                 ?>
                 </form>
@@ -66,7 +97,16 @@
           <div id="conteneur-formulaire-upload-scan">
             <?php
             //transmition des valeur du POST actuel
-              echo '<input type="hidden" value="'.$_POST["idCours"].'" name="idCours">';
+
+
+            if(isset($_POST['datecours'])){
+                      echo '<input type="hidden" name="datecours" value='.$_POST['datecours'].' />';
+                    };
+            if(isset($_POST['nomMod'])){
+                      echo '<input type="hidden" name="nomMod" value='.$_POST['nomMod'].' />';
+                    };
+              // echo '<input type="hidden" value="'.$_POST["datecours"].'" name="datecours">';
+              // echo '<input type="hidden" value="'.$_POST["nomMod"].'" name="nomMod">';
             ?>
             <input type="file" class="input-file" name="fileToUpload" id="fileToUpload">
             <label id="label-fileToUpload" for="fileToUpload">Choose a file</label>
@@ -86,7 +126,7 @@
         <?php
 
         //si l'image n'a pas été upload on essaie de l'upload
-        if($_POST['uploadImage']=='true'){
+        if(isset($_POST['uploadImage']) && $_POST['uploadImage']=='true'){
           $target_dir = "uploads/";
           $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
           $uploadOk = 1;
@@ -130,7 +170,9 @@
           document.getElementById("formulaire-upload-scan").innerHTML =  document.getElementById("formulaire-upload-scan").innerHTML + "<input type=\"hidden\" name=\"target_file\" value=\"'.$target_file.'\" />";
               </script>';
         }else{
-          $target_file = $_POST["target_file"];
+            if (isset($_POST["target_file"])){
+              $target_file = $_POST["target_file"];
+            }
         }
 
         ?>
@@ -175,7 +217,8 @@
                         die("Connection failed: " . $conn->connect_error);
                       }
 
-                      $query = 'SELECT * FROM cours JOIN module ON cours.idModule=module.IdModule  WHERE idcours='.$_POST['idCours'];
+                      $query = 'SELECT * FROM cours JOIN module ON cours.idModule=module.IdModule  WHERE datecours="'.str_replace('T', ' ', $_POST['datecours']).':00" AND nomMod="'.$_POST['nomMod'].'"';
+                      echo $query;
                       $result = mysqli_query($conn, $query);
                       //fonctionnel au dernières nouvelles check plus bas
                       $row = mysqli_fetch_assoc($result);
@@ -184,6 +227,7 @@
                       $promo=$row["promo"];
                       $groupetd=$row["groupetd"];
                       $groupetp=$row["groupetp"];
+                      $idcours=$row["idcours"];
 
                       //on recupere les etudiants qui appartiennent à la promo et si besoin le groupe de TD/TP
                       $query = 'SELECT * FROM etudiant WHERE promo='.$promo.' AND filiere="'.$filiere.'"';
@@ -216,8 +260,8 @@
                         echo '<table style="width:100%"; border="1">
                         <thead>
                         <tr>
-                          <th>Cours : '.$row["nom"].'</th>
-                          <th>idCours : '.$row["idcours"].'</th>
+                          <th>Cours : '.$row["nomMod"].'</th>
+                          <th>datecours : '.$row["datecours"].'</th>
 
                         </tr>
                         <tr>
@@ -231,7 +275,8 @@
 
                         echo '<form class="BoutonFlottant" action="index.php" method="post">';
                         echo '<input type="hidden" name="page" value="ScannerFeuilleAbsence" >';
-                        echo '<input type="hidden" name="idCours" value="'.$row["idcours"].'"></input>';
+                        echo '<input type="hidden" name="idcours" value="'.$row["idcours"].'"></input>';
+                        echo '<input type="hidden" name="envoieBDD" value=""></input>';
 
                         $i=1;
                          while($row = mysqli_fetch_assoc($result)) {
@@ -242,9 +287,9 @@
                             echo '<input type="hidden" name="idEtudiant'.$i.'" value="'.$row['idetudiant'].'"></input>';
 
 
-                            echo '<td>' . $row["prenom"] ."</td>";
+                            echo '<td>' . $row["prenomEtu"] ."</td>";
 
-                            echo '<td>' . $row["nom"] ."</td>";
+                            echo '<td>' . $row["nomEtu"] ."</td>";
                             if(isset($array) && $array[$i]=="present"){
                                 echo '<td ><select name="presence'.$i.'" class="ediTable"><option value="present" selected>present</option> <option value="absent">absent</option></select></td>';
                             }else{
@@ -277,9 +322,7 @@
 
                 echo '</div>';
 
-
-
-                if($_POST['scanTraite']!=='true'){
+                if( !isset($_POST['scanTraite']) || $_POST['scanTraite']!=='true'){
                 echo '<div id="traitement-scan">
 
                   <form class="BoutonFlottant" action="index.php" method="post" enctype="multipart/form-data">
@@ -302,6 +345,57 @@
 
         }
         ?>
+
+        <div>
+          <?php
+            ini_set('display_errors',1);
+            error_reporting(E_ALL);
+            require_once('Config.php');
+
+            if(isset($_POST['envoieBDD'])){
+              $conn = new mysqli($bdServer, $bdUser, $bdUserPasswd,$bdName);
+
+              // Check connection
+              if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+              }
+              echo "Connected successfully<br>";
+
+              echo print_r($_POST);
+              $nbIndices=$_POST['nbIndices'];
+
+              for ($i=1; $i < $nbIndices; $i++) {
+                echo $i."<br>";
+                echo $_POST['idEtudiant'.$i].'<br>';
+                echo $_POST['presence'.$i].'<br>';
+
+                //départ si on veut ajouter les lignes au fur et à mesure que l'on met les fiches (pas conseillé à mon avis)
+                /*$query="If Not Exists(select * from tablename where code='1448523')
+                        Begin
+                        insert into tablename (code) values ('1448523')
+                        End
+                ";*/
+
+                $query = "UPDATE presence SET presence = '".$_POST['presence'.$i]."'
+                          WHERE idetudiant=".$_POST['idEtudiant'.$i]." AND idcours=".$_POST['idcours'];
+
+
+                $result= mysqli_query($conn,$query);
+                echo $query;
+              }
+
+              //  $query = 'INSERT INTO presence ("idetudiant","idcours","presence") VALUES ('.$idEtudiant.','.$idCours.','.$presence.');';
+              //$result = mysqli_query($conn, $query);
+              //    echo $query;
+
+
+            }else {
+              echo 'Le POST est vide, aucunes données n ont été reçues par cette page';
+            }
+
+          ?>
+
+        </div>
 
       </div>
 

@@ -34,6 +34,9 @@
       <form class="form-menu-panel" action="index.php" method="post">
         <input type="submit" name="page" value="acceuil" >
       </form>
+      <form class="form-menu-panel" action="index.php" method="post">
+        <input type="submit" name="page" value="AjouterEtudiant" >
+      </form>
     </div>
     <div class="section-menu-panel">
       <div class="section-title">Scolarité</div>

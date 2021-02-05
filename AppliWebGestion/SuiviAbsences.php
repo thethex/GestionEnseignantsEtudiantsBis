@@ -141,7 +141,7 @@ if(!isset($_POST['modeAffichageAbsences'])){
                   echo '<div class="block-cours" style="flex :'.$row['duree'].' 1 100%;background-color:';
                   if($row['presence']==NULL){echo 'rgb(144,146,152)';}else{ $coursPasse+=1; ; if($row['presence']=='present'){echo '#4e9bef';}else if($row['justificatif']=='OUI'){echo '#efb64d';$absenteisme+=0.5;}else{echo '#e63141';$absenteisme+=1;}};
                   echo  ';">';
-                  echo  '<div class="info-cours">'.$row['groupetd'].'-'.$row['groupetp'].' : '.$row['datecours'].'</div>';
+                  echo  '<div class="info-cours">'.$row['nomMod'].' '.$row['type'].' '.$row['groupetd'].'-'.$row['groupetp'].'<br>'.$row['datecours'].'<br>'.$row['nomEns'].' '.$row['prenomEns'].'</div>';
                   echo '</div>';
 
 
