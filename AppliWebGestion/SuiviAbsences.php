@@ -91,7 +91,7 @@ if(!isset($_POST['modeAffichageAbsences'])){
               if($filiere!=='initialisationFiliere'){
                   echo '</div></div>';
               }
-              echo '<div class="etudiant-filiere"><div class="titre">'.$row['filiere'].'</div><div class="contenu">';
+              echo '<div class="etudiant-filiere"><div onclick="toggleContenu(this)" class="titre">'.$row['filiere'].'</div><div class="contenu cacher">';
               $filiere=$row['filiere'];
             }
               //on re-ouvre une div de promo dès qu'elle change vu qu'on tri ensuite les lignes en fonction des promo
@@ -105,7 +105,7 @@ if(!isset($_POST['modeAffichageAbsences'])){
 
                   echo '</div></div>';
                 }
-                echo '<div class="etudiant-promo"><div class="titre">'.$row['promo'].'</div><div class="contenu">';
+                echo '<div class="etudiant-promo"><div onclick="toggleContenu(this)" class="titre">'.$row['promo'].'</div><div class="contenu cacher">';
                 $promo=$row['promo'];
               }
               //on re-ouvre une div d'etudiant dès qu'elle change vu qu'on tri ensuite les lignes en fonction des noms d'etudiant
@@ -123,7 +123,7 @@ if(!isset($_POST['modeAffichageAbsences'])){
                     $absenteisme=0.0;
                     $coursPasse=0.0;
                 }
-                echo  '<div class="etudiant-etudiant"><div class="titre">'.$row['nomEtu'].' - '.$row['prenomEtu'].'</div><div class="contenu">';
+                echo  '<div class="etudiant-etudiant"><div onclick="toggleContenu(this)" class="titre">'.$row['nomEtu'].' - '.$row['prenomEtu'].'</div><div class="contenu cacher">';
                 $etudiant=$row['nomEtu'];
                 //on reinitialise les modules pour chaques etudiants
                 $module='initialisationModule';
@@ -167,6 +167,19 @@ if(!isset($_POST['modeAffichageAbsences'])){
         </div>*/
       }
       ?>
+      <script>
+        function toggleContenu(element){
+
+            var contenu =  element.nextElementSibling;
+
+            if(contenu!=null & contenu.classList.contains("cacher")){
+              contenu.classList.remove("cacher");
+            }else{
+              contenu.classList.add("cacher");
+
+            }
+        }
+      </script>
     </div>
   </div>
 </div>

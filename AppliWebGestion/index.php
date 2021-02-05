@@ -47,10 +47,7 @@
     <div class="section-menu-panel">
       <div class="section-title">Responsables études</div>
       <form class="form-menu-panel" action="index.php" method="post">
-        <input type="submit" name="page" value="ScannerFeuilleAbsence" >
-      </form>
-      <form class="form-menu-panel" action="index.php" method="post">
-        <input type="submit" name="page" value="acceuil" >
+        <input type="submit" name="page" value="SuiviAbsences" >
       </form>
     </div>
     <div class="section-menu-panel">
@@ -67,24 +64,16 @@
 
 <div id="contentWrap" class="withoutMenu">
   <?php
-  switch($_POST['page'])
-  {
-    case 'ScannerFeuilleAbsence':
-    include './ScannerFeuilleAbsence.php';
-    break;
-    case 'acceuil':
+  if(file_exists ('./'.$_POST['page'].'.php' )){
+    include './'.$_POST['page'].'.php';
+  }else{
     include './acceuil.html';
-    break;
-    default:
-    include './acceuil.html';
-
   }
   ?>
 </div>
 </div>
 </body>
 <footer>
-
   <script>
   var s = document.getElementById('menuCroix');
   s.onclick=function(){
@@ -92,21 +81,25 @@
   }
 
   function toggleMenu(etat){
+    /*on rajoute les animations contrairement à l'initialisation*/
     if(etat == "open"){
       s.className = ""
       document.cookie="etatMenu=fermé;";
-      document.getElementById('contentWrap').className ="withoutMenu";
-      document.getElementById('menuPanelWrap').style="display:none";
+      document.getElementById('contentWrap').className ="withoutMenu fast-ease-in-out";
+      document.getElementById('menuPanelWrap').className="menuFerme fast-ease-in-out";
     } else {
       s.className = "open"
       document.cookie="etatMenu=ouvert;";
-      document.getElementById('contentWrap').className ="withMenu";
-      document.getElementById('menuPanelWrap').style="display:flex";
+      document.getElementById('contentWrap').className ="withMenu fast-ease-in-out";
+      document.getElementById('menuPanelWrap').className="menuOuvert fast-ease-in-out";
     }
   }
+  /*INITIALISATION*/
   var cookieValue = document.cookie.split(';').find(row => row.startsWith('etatMenu')).split('=')[1];
-  toggleMenu(cookieValue);
+  if(cookieValue=="ouvert"){  document.getElementById('contentWrap').className ="withMenu";document.getElementById('menuPanelWrap').className="menuOuvert";document.getElementById('menuCroix').className="open";
+}else{document.getElementById('contentWrap').className ="withoutMenu";document.getElementById('menuPanelWrap').className="menuFerme";document.getElementById('menuCroix').className="";};
   </script>
+
 
 </footer>
 </html>
