@@ -167,10 +167,6 @@
                   if(isset($_POST['scanTraite'])){
                   echo '<div id="JSON" class="sous-zone-affichage">';
 
-                      ini_set('display_errors',1);
-                      error_reporting(E_ALL);
-
-
 
                       $conn = new mysqli($bdServer, $bdUser, $bdUserPasswd,$bdName);
 
@@ -178,12 +174,9 @@
                       if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                       }
-                      echo "Connected successfully<br>";
 
                       $query = 'SELECT * FROM cours JOIN module ON cours.idModule=module.IdModule  WHERE idcours='.$_POST['idCours'];
                       $result = mysqli_query($conn, $query);
-                      echo $query;
-
                       //fonctionnel au dernières nouvelles check plus bas
                       $row = mysqli_fetch_assoc($result);
 

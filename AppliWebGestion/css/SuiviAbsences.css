@@ -1,0 +1,157 @@
+#content{
+  margin-top:100px;
+}
+
+.conteneur-selecteur{
+  position:relative;
+  height:64px;
+  max-width:600px;
+  margin:0 auto;
+  background-color:rgba(0,0,0,0.2);
+  border:2px solid #000;
+  border-radius:4px;
+}
+.conteneur-selecteur:hover .conteneur-choix{
+  display:block;
+}
+.selection-actuelle{
+
+}
+.conteneur-choix{
+  margin:0;
+  display:none;
+  position:absolute;
+  z-index:10;
+  top:100%;
+  left:0;
+  right:0;
+  width:100%;
+  border:2px solid #000;
+  background-color:rgba(0,0,0,0.2);
+}
+.conteneur-choix:hover{
+  display:block;
+}
+
+.conteneur-choix form input{
+  width:100%;
+  margin:0;
+  height:100%;
+    background-color:rgba(0,0,0,0.2);
+}
+.conteneur-choix form input:hover{
+  background-color:#0d65a8 ;
+}
+.titre{
+		font-family: Helvetica,Helvetica Neue, Arial, sans-serif;
+		display:flex;
+    align-items: center;
+	  justify-content: center;
+}
+.conteneur-suivi{
+  position:relative;
+  max-width:1000px;
+  margin:60px auto;
+  background-color:rgba(0,0,0,0.2);
+  border:2px solid #000;
+  border-radius:4px;
+
+}
+
+.etudiant-filiere{
+  position:relative;
+  width:calc(100% - 20px;);
+  padding:10px;
+
+}
+.etudiant-filiere > .titre{
+    padding:2px;
+  font-size:32px;
+  border:2px solid #000;
+  background-color:#0d65a8 ;
+}
+.etudiant-filiere > .titre:hover{
+  background-color:#0961a4 ;
+}
+
+.etudiant-promo{
+  width:99%;
+}
+.etudiant-promo > .titre{
+  padding:2px;
+  font:28px italic;
+  border:2px solid #000;
+  border-top-width: 0px;
+}
+.etudiant-promo > .contenu{
+  border:2px solid #000;
+  border-top-width:0px;
+  border-bottom-width: 0px;
+  background: linear-gradient(45deg,rgb(15,15,20) 0%,rgb(230,230,230) 100%);
+}
+.etudiant-etudiant {
+  position: relative;
+  width:99%;
+}
+.etudiant-etudiant > .titre{
+  justify-content: flex-start;
+  padding:2px;
+  font-size:22px;
+  border:1px solid #000;
+  border-top-width: 0px;
+  background-color:rgba(255,255,255,0.8);
+  color:rgb(30,30,30);
+}
+.etudiant-etudiant > .titre:hover{
+  background-color:rgba(125,180,255,0.9);
+}
+.etudiant-module{
+  margin-left:1%;
+  width:99%;
+  height:64px;
+  display:flex;
+  border:1px solid #000;
+  border-radius:2px;
+
+}
+.etudiant-etudiant > .indicateur-general{
+  position:absolute;
+  right:0;
+  top:0px;
+  height:30px;
+  width:100px;
+  border-left:1px solid #000;
+}
+
+.etudiant-module > .titre-mod{
+  height:100%;
+  flex:1 1 10%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background-color:rgb(230,230,230);
+  color:#01405f;
+
+
+}
+.etudiant-module > .contenu{
+  height:100%;
+  flex: 1 1 90%;
+  display:flex;
+  flex-wrap:nowrap;
+}
+.block-cours{
+  height:100%;
+  border-left:1px solid #000;
+  border-radius:1px;
+}
+.block-cours:hover > .info-cours{
+  display:block;
+}
+.info-cours{
+  display:none;
+  position:absolute;
+  background-color:rgba(0,0,0,0.2);
+  border:2px solid #000;
+  border-radius:4px;
+}

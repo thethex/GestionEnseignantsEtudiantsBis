@@ -26,6 +26,7 @@ h3
 	font-size: x-large;
 	font-family: Helvetica,Helvetica Neue, Arial, sans-serif;
 }
+
 body
 {
 	padding:0;
@@ -50,7 +51,7 @@ body
 	border-radius:10px;
 	position:relative;
 	background-color: rgba(0, 0, 0, 0.2);
-	box-shadow:2px 2px 3px 4px rgba(0,0,0,0.1);
+	box-shadow:2px 2px 3px 4px rgba(0,0,20,0.1);
 
 }
 
@@ -67,7 +68,7 @@ body
 	}
 	.blured-big-panel{
 		box-shadow:3px 3px 5px 6px rgba(255,255,255,0.1);
-		background-color:rgba(255,255,255,0.4);
+		background-color:rgba(228,230,255,0.4);
 
 	}
 }
