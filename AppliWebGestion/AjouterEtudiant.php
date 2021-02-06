@@ -5,11 +5,11 @@
 
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="./css/AjouterEtudiant.css" />
         <title>SaisieEtudiant</title>
     </head>
     <div class="contenu-centre">
-      <div id="content" class="blured-big-panel">
+      <div id="content" class="stylized-form">
        <?php
 
        if(isset($_POST['formulaire-soumis'])){
@@ -49,28 +49,27 @@
          }
         }else{
 
-          echo '<h1> Saisie de l etudiant à ajouter</h1>
-          <h4>
-            <form method="post" action="index.php">
+          echo "<h1> Saisie de l'étudiant à ajouter</h1>";
+            echo '<form method="post" action="index.php">
             <input type="hidden" name="page" value="AjouterEtudiant" >
             <input type="hidden" name="formulaire-soumis" value="true" >
-            Nom : <input type="text" name="Nom" />
-            Prenom : <input type="text" name="Prenom" />
-            promotion : <input type="text" name="promotion" />
-            filiere  : <select name="filiere" id="filiere">
+
+            <div class="entry-stylized-form"><div class="title-stylized-form">Nom </div>  <input type="text" name="Nom" /></div>
+            <div class="entry-stylized-form"><div class="title-stylized-form">Prenom</div> <input type="text" name="Prenom" /></div>
+            <div class="entry-stylized-form"><div class="title-stylized-form">Promotion</div> <input type="text" name="promotion" /></div>
+            <div class="entry-stylized-form"><div class="title-stylized-form">Filiere</div> <select name="filiere" id="filiere">
               <option value="IAI">IAI</option>
               <option value="MM">MM</option>
               <option value="EBE">EBE</option>
               <option value="IDU">IDU</option>
               <option value="ITII-CM">ITII-CM</option>
               <option value="ITII-MP">ITII-MP</option>
-              </select>
-            groupetd  : <input type="text" name="groupetd" />
-            groupetp  : <input type="text" name="groupetp" />
+              </select></div>
+            <div class="entry-stylized-form"><div class="title-stylized-form">Groupe TD </div><input type="text" name="groupetd" /></div>
+            <div class="entry-stylized-form"><div class="title-stylized-form">Groupe TP </div><input type="text" name="groupetp" /></div>
             </select>
-          <input type="submit" value="Enregistrer"/>
-          </form>
-           </h4>';
+          <div class="button-stylized-form"><input type="submit" value="Enregistrer"/></div>
+          </form>';
 
          }
          ?>
