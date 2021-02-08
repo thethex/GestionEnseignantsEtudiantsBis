@@ -69,7 +69,7 @@
                       }
 
                       $query = 'SELECT nomMod FROM module';
-
+                      
                       $result = mysqli_query($conn, $query);
                       foreach($result as $key => $val){
                         foreach($val as $key2 => $res){
@@ -84,7 +84,7 @@
                       }
                       echo '</select>';
 
-
+                    
                           echo '<input  class="grosBoutonBleu bouton-formulaire-upload" type="submit" value="valider cours" name="submit">';
 
                 ?>
@@ -238,7 +238,7 @@
                       if($groupetp!==NULL){
                           $query=$query.' AND groupetp= '.$groupetp.'"';
                       }
-
+                          $query=$query.'ORDER BY groupetd, groupetp, nomEtu, prenomEtu';
 
                       $result = mysqli_query($conn, $query);
 
@@ -247,7 +247,7 @@
                       //echo print_r($_POST);
                       if(isset($_POST['scanTraite'])){
 
-                          $command = './py/test2Python.py ';
+                          $command = 'py/test2Python.py ';
 
                           exec($command, $out, $status);
                           print_r($out[0]);
@@ -322,7 +322,11 @@
 
                 echo '</div>';
 
-                if( !isset($_POST['scanTraite']) || $_POST['scanTraite']!=='true'){
+                if(isset($_POST['scanTraite'])){
+
+                }else{$_POST['scanTraite']=false; }
+
+                if( $_POST['scanTraite']!=='true'){
                 echo '<div id="traitement-scan">
 
                   <form class="BoutonFlottant" action="index.php" method="post" enctype="multipart/form-data">
