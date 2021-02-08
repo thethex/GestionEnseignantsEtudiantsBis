@@ -7,15 +7,15 @@
   height:64px;
   max-width:600px;
   margin:0 auto;
-  background-color:rgba(0,0,0,0.2);
-  border:2px solid #000;
+  background-color:var(--bleu-foncé-polytech);
+  border:2px solid var(--panel-border-color);
   border-radius:4px;
 }
 .conteneur-selecteur:hover .conteneur-choix{
   display:block;
 }
-.selection-actuelle{
-
+.selection-actuelle h2{
+    color:rgb(230,230,230);
 }
 .conteneur-choix{
   margin:0;
@@ -34,6 +34,7 @@
 }
 
 .conteneur-choix form input{
+  border:none;
   width:100%;
   margin:0;
   height:100%;
@@ -53,7 +54,7 @@
   max-width:1000px;
   margin:60px auto;
   background-color:rgba(0,0,0,0.2);
-  border:2px solid #000;
+  border:2px solid var(--panel-border-color);
   border-radius:4px;
 
 }

@@ -36,31 +36,44 @@
 
     <div class="section-menu-panel">
       <div class="section-title">Général</div>
-      <form class="form-menu-panel" action="index.php" method="post">
-        <input type="submit" name="page" value="acceuil" >
-      </form>
-      <form class="form-menu-panel" action="index.php" method="post">
-        <input type="submit" name="page" value="AjouterEtudiant" >
-      </form>
-    </div>
+        <div class="contenu-section-menu-panel">
+          <form class="form-menu-panel" action="index.php" method="post">
+            <input type="submit" name="page" value="acceuil" >
+          </form>
+          <form class="form-menu-panel" action="index.php" method="post">
+            <input type="submit" name="page" value="AjouterEtudiant" >
+          </form>
+        </div>
+      </div>
     <div class="section-menu-panel">
       <div class="section-title">Scolarité</div>
-      <form class="form-menu-panel" action="index.php" method="post">
-        <input type="submit" name="page" value="ScannerFeuilleAbsence" >
-      </form>
-    </div>
+        <div class="contenu-section-menu-panel">
+          <form class="form-menu-panel" action="index.php" method="post">
+            <input type="submit" name="page" value="ScannerFeuilleAbsence" >
+          </form>
+        </div>
+      </div>
     <div class="section-menu-panel">
       <div class="section-title">Responsables études</div>
-      <form class="form-menu-panel" action="index.php" method="post">
-        <input type="submit" name="page" value="SuiviAbsences" >
-      </form>
-    </div>
+        <div class="contenu-section-menu-panel">
+          <form class="form-menu-panel" action="index.php" method="post">
+            <input type="submit" name="page" value="SuiviAbsences" >
+          </form>
+        </div>
+      </div>
     <div class="section-menu-panel">
       <div class="section-title">Étudiant</div>
+        <div class="contenu-section-menu-panel">
+        </div>
     </div>
-    <div class="fondGlass">
+    <div class="fond">
+      <div class="fondGlass">
+      </div>
+      <div class="fondGlassBas">
+      </div>
     </div>
   </div>
+
 </div>
 
 
@@ -100,6 +113,21 @@
     }
   }
 
+  function toggleSubMenu(SousMenu){
+    /*on rajoute les animations contrairement à l'initialisation*/
+    nomSousMenu = sectionMenu.id;
+    if(etat == "open"){
+      s.className = ""
+      localStorage.setItem('etatMenu', 'fermé');
+      document.getElementById('contentWrap').className ="withoutMenu fast-ease-in-out";
+      document.getElementById('menuPanelWrap').className="menuFerme fast-ease-in-out";
+    } else {
+      s.className = "open"
+      localStorage.setItem('etatMenu', 'ouvert');
+      document.getElementById('contentWrap').className ="withMenu fast-ease-in-out";
+      document.getElementById('menuPanelWrap').className="menuOuvert fast-ease-in-out";
+    }
+  }
   //switch light/dark mode
   const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
   const currentTheme = localStorage.getItem('theme');
@@ -132,7 +160,7 @@
 
   //var cookieValue = document.cookie.replace(/\s+/g, '').split(';').find(row => row.startsWith('etatMenu')).split('=')[1];
   var cookieValue = localStorage.getItem('etatMenu');
-  
+
   if(cookieValue=="ouvert"){  document.getElementById('contentWrap').className ="withMenu";document.getElementById('menuPanelWrap').className="menuOuvert";document.getElementById('menuCroix').className="open";
   }else{document.getElementById('contentWrap').className ="withoutMenu";document.getElementById('menuPanelWrap').className="menuFerme";document.getElementById('menuCroix').className="";};
 

@@ -168,16 +168,19 @@ input:checked + .slider:before {
   z-index:100;
   position:fixed;
   top:50px;
+  padding-top:20px;
   display:flex;
   flex-direction: column;
 }
 
 .menuOuvert{
-  width:15%;
-    visibility: visible;
+  width:20%;
+  max-height:100%;
+  visibility: visible;
 }
 .menuFerme{
-  width:0%;
+  max-height:0;
+  width:20%;
   visibility: hidden;
 }
 
@@ -188,7 +191,7 @@ input:checked + .slider:before {
 .withMenu{
   margin-top:60px ;
   margin-left:20%;
-  width:80% ;
+  width:82% ;
 
 }
 
@@ -196,15 +199,39 @@ input:checked + .slider:before {
   flex:0 1 100%;
 }
 
-.fondGlass{
+.fond{
   position:absolute;
   z-index:-1;
   top:0;
   left:0;
   right:0;
   bottom:0;
-  background-color:var(--panel-blue-semi-visible-color);
+  display:flex;
+  flex-flow: column;
+}
+.fondGlass{
+  flex: 1 1 100%;
+  background-color:var(--bleu-foncé-polytech);
   box-shadow: 3px 3px 0px 0px rgba(0,0,0,0.1);
+}
+
+@media screen and (min-width:1100px) {
+  .menuOuvert, .menuFerme{
+    max-width:300px;
+  }
+  #menuPanelWrap::after{
+    content:"";
+    display: block;
+    height:300px;
+    width:100%;
+  }
+  .fondGlassBas{
+    flex: 1 1 100%;
+    background-color:var(--bleu-foncé-polytech);
+    mask-image: url(basMenu.svg) ;
+    mask-size:100%;
+    mask-repeat: no-repeat;
+  }
 }
 
 @media screen and (max-width:1100px) {
@@ -219,6 +246,7 @@ input:checked + .slider:before {
     flex-direction: row;
     min-height:0vh;
     justify-content:right;
+    flex-wrap: wrap;
   }
   .menuOuvert{
       width:100%;
@@ -228,19 +256,35 @@ input:checked + .slider:before {
       width:100%;
       max-height:0;
   }
-
+  .section-menu-panel{
+    flex:1 1 25%;
+    min-width:300px;
+  }
 }
 
 .section-menu-panel .section-title{
-  background-color:rgb(120,120,230);
   font-family: Helvetica,Helvetica Neue, Arial, sans-serif;
   font-size:16px;
   padding:5px;
+  padding-left:20px;
   width:calc( 100% - 10px);
-  background-color:var(--bleu-polytech);
   color:white;
 }
 
+.section-title:hover{
+    background-color:#0d65a8 ;
+}
+
+.section-title:hover  +.contenu-section-menu-panel{
+  display:block;
+}
+.contenu-section-menu-panel:hover{
+    display:block;
+}
+
+.contenu-section-menu-panel{
+  display:none;
+}
 .form-menu-panel input{
   font-family: Helvetica,Helvetica Neue, Arial, sans-serif;
   font-size:14px;
@@ -248,8 +292,9 @@ input:checked + .slider:before {
   margin:2px auto;
   margin-left:20%;
   width:80%;
+  background-color:transparent;
   border:none;
-  background-color:#1d85c8;
+  border-left:6px solid #1d85c8;;
   color:white;
 }
 .form-menu-panel input:hover{
