@@ -31,7 +31,7 @@ body
 {
 	padding:0;
 	margin:0;
-	background-color: rgb(240,240,240);
+	background-color: var(--body-color);
 }
 .logofloat
 {
@@ -50,25 +50,27 @@ body
 	padding:10px;
 	border-radius:10px;
 	position:relative;
-	background-color: rgba(0, 0, 0, 0.2);
-	box-shadow:2px 2px 3px 4px rgba(0,0,20,0.1);
+	background-color:var(--panel-color);
+	box-shadow:1px 1px 2px 2px var(--panel-border-color);
 
 }
+p, h1,h2,h3,h4,h5{
+		color:var(--common-text-color);
+}
 
+:root {
+  --body-color:rgb(240,240,240);
+	--common-text-color:black;
 
+	--bleu-polytech:#1d85c8;
 
-@media (prefers-color-scheme: dark) {
-	body
-	{
-
-		background-color: rgb(34,37,42);
-	}
-	p,b,h1,h2,h3,body,a{
-		color:rgb(230,230,230);
-	}
-	.blured-big-panel{
-		box-shadow:3px 3px 5px 6px rgba(255,255,255,0.1);
-		background-color:rgba(228,230,255,0.4);
-
-	}
+	--panel-color:#d9edf7;
+	--panel-blue-semi-visible-color:#d8ecf644;
+	--panel-border-color:#bce8f1;
+}
+[data-theme="dark"] {
+	--panel-color:#d8ecf644;
+	--body-color:rgb(34,37,42);
+	--common-text-color:rgb(230,230,230);
+	--panel-border-color:black;
 }

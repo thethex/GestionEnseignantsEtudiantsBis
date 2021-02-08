@@ -25,7 +25,12 @@
         ?>
       </h1>
     </div>
-
+    <div class="theme-switch-wrapper">
+         <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+              <div class="slider round"></div>
+          </label>
+    </div>
   </div>
   <div id="menuPanelWrap">
 
@@ -43,9 +48,6 @@
       <form class="form-menu-panel" action="index.php" method="post">
         <input type="submit" name="page" value="ScannerFeuilleAbsence" >
       </form>
-      <form class="form-menu-panel" action="index.php" method="post">
-        <input type="submit" name="page" value="acceuil" >
-      </form>
     </div>
     <div class="section-menu-panel">
       <div class="section-title">Responsables études</div>
@@ -55,9 +57,6 @@
     </div>
     <div class="section-menu-panel">
       <div class="section-title">Étudiant</div>
-      <form class="form-menu-panel" action="index.php" method="post">
-        <input type="submit" name="page" value="ScannerFeuilleAbsence" >
-      </form>
     </div>
     <div class="fondGlass">
     </div>
@@ -78,6 +77,9 @@
 </body>
 <footer>
   <script>
+  /*On recreer la variable local storage si elle n'existe pas*/
+  monStockage = localStorage;
+
   var s = document.getElementById('menuCroix');
   s.onclick=function(){
     toggleMenu(s.className);
@@ -87,20 +89,53 @@
     /*on rajoute les animations contrairement à l'initialisation*/
     if(etat == "open"){
       s.className = ""
-      document.cookie="etatMenu=fermé;";
+      localStorage.setItem('etatMenu', 'fermé');
       document.getElementById('contentWrap').className ="withoutMenu fast-ease-in-out";
       document.getElementById('menuPanelWrap').className="menuFerme fast-ease-in-out";
     } else {
       s.className = "open"
-      document.cookie="etatMenu=ouvert;";
+      localStorage.setItem('etatMenu', 'ouvert');
       document.getElementById('contentWrap').className ="withMenu fast-ease-in-out";
       document.getElementById('menuPanelWrap').className="menuOuvert fast-ease-in-out";
     }
   }
+
+  //switch light/dark mode
+  const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+  const currentTheme = localStorage.getItem('theme');
+
+  if (currentTheme) {
+      document.documentElement.setAttribute('data-theme', currentTheme);
+
+      if (currentTheme === 'dark') {
+          toggleSwitch.checked = true;
+      }
+  }
+
+  function switchTheme(e) {
+      if (e.target.checked) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('theme', 'dark');
+
+
+      }
+      else {        document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+
+      }
+  }
+
+  toggleSwitch.addEventListener('change', switchTheme, false);
+
+
   /*INITIALISATION*/
-  var cookieValue = document.cookie.split(';').find(row => row.startsWith('etatMenu')).split('=')[1];
+
+  //var cookieValue = document.cookie.replace(/\s+/g, '').split(';').find(row => row.startsWith('etatMenu')).split('=')[1];
+  var cookieValue = localStorage.getItem('etatMenu');
+  
   if(cookieValue=="ouvert"){  document.getElementById('contentWrap').className ="withMenu";document.getElementById('menuPanelWrap').className="menuOuvert";document.getElementById('menuCroix').className="open";
-}else{document.getElementById('contentWrap').className ="withoutMenu";document.getElementById('menuPanelWrap').className="menuFerme";document.getElementById('menuCroix').className="";};
+  }else{document.getElementById('contentWrap').className ="withoutMenu";document.getElementById('menuPanelWrap').className="menuFerme";document.getElementById('menuCroix').className="";};
+
   </script>
 
 

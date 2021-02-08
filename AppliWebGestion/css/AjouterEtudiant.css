@@ -3,14 +3,12 @@
     position:relative;
     margin:100px auto;
     padding:20px;
-    background-color:#d8ecf644;
-    color:rgb(230,230,230);
+    background-color:var(--panel-blue-semi-visible-color);
     box-shadow: 2px 2px #000;
 }
 .stylized-form form{
     position:relative;
     padding:20px;
-    color:rgb(230,230,230);
     display:flex;
     flex-wrap: wrap;
 }
@@ -24,12 +22,12 @@
 
 .title-stylized-form{
   font-family: Helvetica,Helvetica Neue, Arial, sans-serif;
-  color:rgb(30,30,30);
+  color:var(--common-text-color);
   font:16px italic;
   padding:4px 2px;
   justify-content: flex-start;
   margin:20px;
-  border-bottom: 2px solid #3b82aa;
+  border-bottom: 2px solid  var(--common-text-color);
 }
 
 
@@ -47,10 +45,6 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .title-stylized-form{
-    color:rgb(230,230,230);
-    border-bottom: 2px solid white;
-  }
   .button-stylized-form input{
       color:rgb(230,230,230);
       background-color:#384c56;

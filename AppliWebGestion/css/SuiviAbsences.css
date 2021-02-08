@@ -68,7 +68,8 @@
     padding:2px;
   font-size:32px;
   border:2px solid #000;
-  background-color:#0d65a8 ;
+  color:rgb(230,230,230);
+  background-color:var(--bleu-polytech);
 }
 .etudiant-filiere > .titre:hover{
   background-color:#0961a4 ;
