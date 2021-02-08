@@ -128,7 +128,8 @@
         //si l'image n'a pas été upload on essaie de l'upload
         if(isset($_POST['uploadImage']) && $_POST['uploadImage']=='true'){
           $target_dir = "uploads/";
-          $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+          $target_file = $target_dir ."scanTest.pdf";
+// basename($_FILES["fileToUpload"]["name"]
           $uploadOk = 1;
           $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
@@ -277,6 +278,8 @@
                         echo '<input type="hidden" name="page" value="ScannerFeuilleAbsence" >';
                         echo '<input type="hidden" name="idcours" value="'.$row["idcours"].'"></input>';
                         echo '<input type="hidden" name="envoieBDD" value=""></input>';
+                        // echo '<input type="hidden" name="target_file" value="'.$target_file.'"></input>';
+
 
                         $i=1;
                          while($row = mysqli_fetch_assoc($result)) {
@@ -386,11 +389,18 @@
 
                 $result= mysqli_query($conn,$query);
                 echo $query;
+
               }
 
               //  $query = 'INSERT INTO presence ("idetudiant","idcours","presence") VALUES ('.$idEtudiant.','.$idCours.','.$presence.');';
               //$result = mysqli_query($conn, $query);
               //    echo $query;
+
+              /* On supprime le fichier temporaire sur le serveur*/
+              if (file_exists("uploads/scanTest.pdf"))
+                {unlink("uploads/scanTest.pdf");}
+              
+
 
 
             }else {
