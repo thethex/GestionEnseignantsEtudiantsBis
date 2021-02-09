@@ -30,7 +30,7 @@ require_once('Config.php');
       $heurescm=$_POST['heurescm'];
       $heurestd=$_POST['heurestd'];
       $heurestp=$_POST['heurestp'];
-            $idEns=$_POST['idEns'];
+      $idEns=$_POST['idEns'];
       $filiere=$_POST['filiere'];
       $promo=$_POST['promo'];
 
@@ -69,10 +69,10 @@ require_once('Config.php');
       <input type="hidden" name="page" value="AjouterModule" >
       <input type="hidden" name="formulaire-soumis" value="true" >
 
-      <div class="entry-stylized-form"><div class="title-stylized-form">nomMod </div>  <input type="text" name="nomMod" /></div>
-      <div class="entry-stylized-form"><div class="title-stylized-form">semestre</div> <input type="text" name="semestre" /></div>
-      <div class="entry-stylized-form"><div class="title-stylized-form">heurescm</div> <input type="text" name="heurescm" /></div>
-      <div class="entry-stylized-form"><div class="title-stylized-form">heurestd</div> <input type="text" name="heurestd" /></div>
+      <div class="entry-stylized-form"><div class="title-stylized-form">Nom module </div>  <input type="text" name="nomMod" /></div>
+      <div class="entry-stylized-form"><div class="title-stylized-form">Semestre</div> <input type="text" name="semestre" /></div>
+      <div class="entry-stylized-form"><div class="title-stylized-form">Nombre d'."'".'heures cm</div> <input type="text" name="heurescm" /></div>
+      <div class="entry-stylized-form"><div class="title-stylized-form">Nombre d'."'".'heures td</div> <input type="text" name="heurestd" /></div>
 
 
       <div class="entry-stylized-form"><div class="title-stylized-form">Nom Prenom enseignant</div> <select name="idEns" id="idEns">';
@@ -93,13 +93,20 @@ echo '
       echo'
 
 
-      <div class="entry-stylized-form"><div class="title-stylized-form">heurestp </div><input type="text" name="heurestp" /></div>
-      <div class="entry-stylized-form"><div class="title-stylized-form">filiere </div><input type="text" name="filiere" /></div>
+      <div class="entry-stylized-form"><div class="title-stylized-form">Nombre d'."'".'heures tp </div><input type="text" name="heurestp" /></div>
+      <div class="entry-stylized-form"><div class="title-stylized-form">Filiere</div> <select name="filiere" id="filiere">
+      <option value="IAI">IAI</option>
+      <option value="MM">MM</option>
+      <option value="EBE">EBE</option>
+      <option value="IDU">IDU</option>
+      <option value="ITII-CM">ITII-CM</option>
+      <option value="ITII-MP">ITII-MP</option>
+      </select></div>
 
 
 
 
-      <div class="entry-stylized-form"><div class="title-stylized-form">promo </div><input type="text" name="promo" /></div>
+      <div class="entry-stylized-form"><div class="title-stylized-form">Promo </div><input type="text" name="promo" /></div>
 
 
       </select>
