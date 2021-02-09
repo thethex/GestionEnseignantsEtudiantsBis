@@ -47,6 +47,10 @@
         <input type="submit" name="page" value="AjouterEnseignant" >
       </form>    
 
+      <form class="form-menu-panel" action="index.php" method="post">
+        <input type="submit" name="page" value="AjouterModule" >
+      </form> 
+
     </div>
     <div class="section-menu-panel">
       <div class="section-title">Scolarité</div>
