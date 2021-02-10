@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,10 +45,15 @@
           <form class="form-menu-panel" action="index.php" method="post">
            <input type="submit" name="page" value="AjouterEnseignant" >
          </form>
-
          <form class="form-menu-panel" action="index.php" method="post">
            <input type="submit" name="page" value="AjouterModule" >
+         </form>
+         <form class="form-menu-panel" action="index.php" method="post">
+           <input type="submit" name="page" value="ModifierEtudiant" >
          </form> 
+         <form class="form-menu-panel" action="index.php" method="post">
+           <input type="submit" name="page" value="ModifierModule" >
+         </form>  
         </div>
       </div>
     <div class="section-menu-panel">
