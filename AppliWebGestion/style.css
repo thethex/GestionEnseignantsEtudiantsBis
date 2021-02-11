@@ -32,6 +32,7 @@ body
 	padding:0;
 	margin:0;
 	background-color: var(--body-color);
+	color:var(--common-text-color);
 }
 .logofloat
 {
@@ -48,7 +49,7 @@ body
 .blured-big-panel{
 	margin:50px;
 	padding:10px;
-	border-radius:10px;
+	border-radius:4px;
 	position:relative;
 	background-color:var(--panel-blue-semi-visible-color);
 	box-shadow:1px 1px 2px 2px var(--panel-border-color);
@@ -59,6 +60,7 @@ p, h1,h2,h3,h4,h5{
 }
 
 :root {
+
 	--bleu-polytech:#009fde;
 	--bleu-foncé-polytech:#004877;
   --body-color:rgb(240,240,240);
@@ -69,10 +71,19 @@ p, h1,h2,h3,h4,h5{
 	--panel-color:#d9edf7;
 	--panel-blue-semi-visible-color:#d8ecf644;
 	--panel-border-color:#bce8f1;
+
+	--bleu-gris-boutons:#384c56;
+
+	--filtre-blanc:rgba(255,255,255,0.9);
 }
 [data-theme="dark"] {
 	--panel-color:#d8ecf644;
 	--body-color:rgb(34,37,42);
 	--common-text-color:rgb(230,230,230);
 	--panel-border-color:black;
+	--filtre-blanc:rgba(255,255,255,0.8);
+}
+
+.displayBlock{
+	  display:block !important;
 }

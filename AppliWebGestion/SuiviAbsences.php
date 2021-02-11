@@ -137,8 +137,9 @@ if(!isset($_POST['modeAffichageAbsences'])){
                   $module=$row['nomMod'];
                 }
                   //on re-ouvre une div de cours pour chaque cours du module chaque cours est unique donc pas d'initialisation ou autres
-
-                  echo '<div class="block-cours" style="flex :'.$row['duree'].' 1 100%;background-color:';
+                  $coefFlex=((float) $row["duree"])/2;
+                  $invcoefFlex=1/$coefFlex;
+                  echo '<div class="block-cours" style="flex :'.$coefFlex.' '.$invcoefFlex.' 100%;background-color:';
                   if($row['presence']==NULL){echo 'rgb(144,146,152)';}else{ $coursPasse+=1; ; if($row['presence']=='present'){echo '#4e9bef';}else if($row['justificatif']=='OUI'){echo '#efb64d';$absenteisme+=0.5;}else{echo '#e63141';$absenteisme+=1;}};
                   echo  ';">';
                   echo  '<div class="info-cours">'.$row['nomMod'].' '.$row['type'].' '.$row['groupetd'].'-'.$row['groupetp'].'<br>'.$row['datecours'].'<br>'.$row['nomEns'].' '.$row['prenomEns'].'</div>';

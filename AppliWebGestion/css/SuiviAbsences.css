@@ -9,7 +9,7 @@
   margin:0 auto;
   background-color:var(--bleu-foncé-polytech);
   border:2px solid var(--panel-border-color);
-  border-radius:4px;
+  border-radius:2px;
 }
 .conteneur-selecteur:hover .conteneur-choix{
   display:block;
@@ -38,7 +38,7 @@
   width:100%;
   margin:0;
   height:100%;
-    background-color:rgba(0,0,0,0.2);
+  background-color:rgba(0,0,0,0.2);
 }
 .conteneur-choix form input:hover{
   background-color:#0d65a8 ;
@@ -53,9 +53,9 @@
   position:relative;
   max-width:1000px;
   margin:60px auto;
-  background-color:rgba(0,0,0,0.2);
-  border:2px solid var(--panel-border-color);
-  border-radius:4px;
+  background-color:var(--bleu-gris-boutons);
+  /*border:2px solid var(--panel-border-color);*/
+  border-radius:2px;
 
 }
 
@@ -70,7 +70,7 @@
   font-size:32px;
   border:2px solid #000;
   color:rgb(230,230,230);
-  background-color:var(--bleu-polytech);
+  background-color:var(--bleu-foncé-polytech);
 }
 .etudiant-filiere > .titre:hover{
   background-color:#0961a4 ;
@@ -85,6 +85,8 @@
   font:28px italic;
   border:2px solid #000;
   border-top-width: 0px;
+  color:white;
+  background: var(--bleu-gris-boutons);
 }
 .etudiant-promo > .contenu{
   border:2px solid #000;
@@ -102,7 +104,7 @@
   font-size:22px;
   border:1px solid #000;
   border-top-width: 0px;
-  background-color:rgba(255,255,255,0.8);
+  background-color:var(--filtre-blanc);
   color:rgb(30,30,30);
 }
 .etudiant-etudiant > .titre:hover{
@@ -152,10 +154,11 @@
   display:flex;
 }
 .info-cours{
+  color:rgb(30,30,30);
   display:none;
   position:absolute;
   z-index:10;
-  background-color:rgba(0,0,0,0.2);
+  background-color:rgba(255,255,255,0.8);
   border:2px solid #000;
   border-radius:4px;
   max-width:100%;
